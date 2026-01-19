@@ -17,7 +17,7 @@ type DatabasePools struct {
 
 func ConnectToPostgres(cfg *config.Config) (*DatabasePools, error) {
 	optimizedDSN := fmt.Sprintf(
-		"postgres://%s:%s@%s:%s/%s",
+		"postgres://%s:%s@%s:%s/%s?sslmode=disable",
 		cfg.DBUser, cfg.DBPassword, cfg.DBHost, cfg.DBPort, cfg.DBName,
 	)
 

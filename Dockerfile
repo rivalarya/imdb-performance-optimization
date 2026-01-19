@@ -33,7 +33,7 @@ COPY --from=builder /app/main .
 COPY --from=builder /app/.env* ./
 
 # Expose port
-EXPOSE 4000
+EXPOSE 5000
 
 # Command to run
 CMD ["./main"]

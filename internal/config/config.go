@@ -22,7 +22,7 @@ func Load() *Config {
 	enableCORS, _ := strconv.ParseBool(os.Getenv("ENABLE_CORS"))
 
 	return &Config{
-		Port:          getEnv("PORT", "4000"),
+		Port:          getEnv("PORT", "5000"),
 		Environment:   getEnv("NODE_ENV", "development"),
 		EnableCORS:    enableCORS,
 		AllowedOrigin: getEnv("ALLOWED_ORIGIN", "https://example.com"),
