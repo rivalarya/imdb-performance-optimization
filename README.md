@@ -1,10 +1,10 @@
 # IMDB Performance Optimization
 
-> Proving that PostgreSQL can handle millions of records with proper optimization - achieving up to **19.78× faster** query performance.
+> Proving that PostgreSQL can handle millions of records with proper optimization - achieving up to **108.22× faster** query performance.
 
 ## Demo Link
 
-[https://imdb-performance-optimization.vercel.app/](https://imdb-performance-optimization.vercel.app/)
+[https://imdb.rival.my.id/](https://imdb.rival.my.id/)
 
 ---
 
@@ -126,23 +126,32 @@ Instead of using nested subqueries, I split the logic into **three separate quer
 
 ### Test Environment
 
-| Machine | CPU | RAM | Disk |
-| --- | --- | --- | --- |
-| MacBook Air M1 | 8 Core | 8 GB | 256 GB |
+| Machine                          | CPU    | RAM  | Disk   |
+| -------------------------------- | ------ | ---- | ------ |
+| Oracle Cloud VM (Free Tier, ARM) | 2 Core | 12 GB | 48 GB |
 
-⚠️ **Note:** These results are from a local environment and don't include network latency. Real-world performance may vary.
 
 ### Benchmark Results
 
-| Endpoint             | Unoptimized | Optimized | Latency Reduction | Speedup           |
-| -------------------- | ----------- | --------- | ----------------- | ----------------- |
-| /movies              | 2.730s      | 0.138s    | 94.95%            | **19.78× faster** |
-| /movies?title=batman | 3.540s      | 0.396s    | 88.81%            | **8.94× faster**  |
-| /movies/tt0000002    | 0.502s      | 0.150s    | 70.12%            | **3.35× faster**  |
+⚠️ **Note:** These results were recorded during my own testing. Performance may differ with multiple concurrent users or when the server is under heavy load.
 
 **Simple explanation:**
 - **Unoptimized** = Reading a book page by page to find one word
 - **Optimized** = Using the book's index to jump directly to the right page
+
+| Endpoint               | Unoptimized | Optimized  | Latency Reduction | Speedup            |
+| ---------------------- | ----------- | ---------- | ----------------- | ------------------ |
+| `/movies`              | 2876.061 ms | 26.576 ms  | **99.08%**        | **108.22× faster** |
+| `/movies?title=batman` | 3710.734 ms | 409.300 ms | **88.97%**        | **9.07× faster**   |
+| `/movies/:id`    | 421.742 ms  | 0.633 ms   | **99.85%**        | **666.28× faster** |
+
+**Screenshots**
+![Empty-Unoptimized](images/empty-title-unoptimized.png)
+![Empty-optimized](images/empty-title-optimized.png)
+![Batman-Unoptimized](images/batman-title-unoptimized.png)
+![Batman-optimized](images/batman-title-optimized.png)
+![Detail-Unoptimized](images/detail-title-unoptimized.png)
+![Detail-optimized](images/detail-title-optimized.png)
 
 ---
 
